@@ -10,35 +10,36 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<div class="jumbotron text-center wrapper">
-  <div class="d-flex justify-content-between">
-    <button type="button" class="btn btn-success btn-sm">Start</button>
-    <button type="button" class="btn btn-danger btn-sm">End</button>
-    
+  <div class="wrapper">
+    <!-- <div class="jumbotron text-center">
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-success btn-sm">Start</button>
+        <button type="button" class="btn btn-danger btn-sm">End</button>
+        
+      </div>
+    </div> -->
+    <div class="table-responsive-sm">          
+      <table class="table table-bordered" id="points-table">
+        <thead>
+          <tr>
+            <th><b contenteditable="true">User 1</b><span class="badge badge-primary d-block" id="user0">0</span></th>
+            <th><b contenteditable="true">User 2</b><span class="badge badge-primary d-block" id="user1">0</span></th>
+            <th><b contenteditable="true">User 3</b><span class="badge badge-primary d-block" id="user2">0</span></th>
+            <th><b contenteditable="true">User 4</b><span class="badge badge-primary d-block" id="user3">0</span></th>
+            <th><b contenteditable="true">User 5</b><span class="badge badge-primary d-block" id="user4">0</span></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-around mt-2">
+        <button type="button" class="btn btn-danger btn-sm" id="delete-row">-</button>
+        <button type="button" class="btn btn-primary btn-sm" id="total">Total</button>
+        <button type="button" class="btn btn-success btn-sm" id="add-row">+</button>
+      </div>
+      
+    </div>
   </div>
-</div>
-<div class="table-responsive-sm">          
-  <table class="table table-bordered" id="points-table">
-    <thead>
-      <tr>
-        <th><b contenteditable="true">User 1</b><span class="badge badge-primary d-block" id="user0">0</span></th>
-        <th><b contenteditable="true">User 2</b><span class="badge badge-primary d-block" id="user1">0</span></th>
-        <th><b contenteditable="true">User 3</b><span class="badge badge-primary d-block" id="user2">0</span></th>
-        <th><b contenteditable="true">User 4</b><span class="badge badge-primary d-block" id="user3">0</span></th>
-        <th><b contenteditable="true">User 5</b><span class="badge badge-primary d-block" id="user4">0</span></th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-  <div class="d-flex justify-content-arround mt-2">
-    <button type="button" class="btn btn-danger btn-sm" id="delete-row">-</button>
-    <button type="button" class="btn btn-primary btn-sm" id="total">Total</button>
-    <button type="button" class="btn btn-success btn-sm" id="add-row">+</button>
-  </div>
-  
-</div>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -94,11 +95,6 @@ body{
 .wrapper {
     /* Making the wrapper stack above the body */
     z-index: 2;
-  }
-  #points-table{
-    z-index: 3;
-    position: absolute;
-    top: 0px;
   }
   #points-table thead tr th{
     text-align: center;
