@@ -18,15 +18,18 @@
         
       </div>
     </div> -->
+    <div class="d-flex justify-content-center my-2">
+      <button type="button" class="btn btn-success btn-sm" id="add-new-user">Add new buddy</button>
+    </div>
     <div class="table-responsive-sm">          
       <table class="table table-bordered" id="points-table">
         <thead>
           <tr>
-            <th><b contenteditable="true">User 1</b><span class="badge badge-primary d-block" id="user0">0</span></th>
-            <th><b contenteditable="true">User 2</b><span class="badge badge-primary d-block" id="user1">0</span></th>
-            <th><b contenteditable="true">User 3</b><span class="badge badge-primary d-block" id="user2">0</span></th>
-            <th><b contenteditable="true">User 4</b><span class="badge badge-primary d-block" id="user3">0</span></th>
-            <th><b contenteditable="true">User 5</b><span class="badge badge-primary d-block" id="user4">0</span></th>
+            <th><b contenteditable="true">U 1</b><span class="badge badge-primary d-block f-18px" id="user0">0</span></th>
+            <th><b contenteditable="true">U 2</b><span class="badge badge-primary d-block f-18px" id="user1">0</span></th>
+            <th><b contenteditable="true">U 3</b><span class="badge badge-primary d-block f-18px" id="user2">0</span></th>
+            <th><b contenteditable="true">U 4</b><span class="badge badge-primary d-block f-18px" id="user3">0</span></th>
+            <th><b contenteditable="true">U 5</b><span class="badge badge-primary d-block f-18px" id="user4">0</span></th>
           </tr>
         </thead>
         <tbody>
@@ -44,11 +47,13 @@
 <script type="text/javascript">
     $(document).ready(function(){
       var users = [];
+      var table;
+      var noOfPersons = 5;
+      // total script
       $('#total').click(function(){
-        var table = document.getElementById('points-table');
-        var noOfPersons = 5;
+        table = document.getElementById('points-table');
         var noOfRounds = table.rows.length - 1;
-        debugger
+        // debugger
         for(var i = 0; i < noOfPersons; i++){
           users[i] = 0;
           for(var j = 0; j < noOfRounds; j++){
@@ -59,57 +64,73 @@
         }
         console.log(users);
       });
-
+      // add new row scriopt
       $("#add-row").click(function(){
-        $("#points-table").append('<tr><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td></tr>');
+        table = document.getElementById('points-table');
+        noOfPersons = table.rows[0].cells.length;
+        var pointCell = "<td contenteditable='true' inputmode=decimal>0</td>";
+        var totalPointCell;
+        for (var i = 0; i < noOfPersons; i++) {
+          totalPointCell = totalPointCell + pointCell;
+        }
+        $("#points-table").append("<tr>"+totalPointCell+"</tr>");
+        // debugger
       });
+      // remove last row script
       $("#delete-row").click(function(){
         $('#points-table tr:last').remove();
       });
-      // $("#points-table tbody tr td").keypress(function(e) {
-      //   // debugger
-      //   console.log("cliked");
-      //   if (isNaN(String.fromCharCode(e.which))) e.preventDefault();
-      // });
-      $(document).on('keypress', function(e) {
-        // debugger
-        console.log("cliked");
+      // avoid string script
+      $("#points-table tbody").on('keypress', function(e) {
         if (isNaN(String.fromCharCode(e.which))) e.preventDefault();
+      });
+      //add new user script
+      $("#add-new-user").click(function(){
+        table = document.getElementById('points-table');
+        noOfPersons = table.rows[0].cells.length+1;
+        // <th><b contenteditable="true">User 1</b><span class="badge badge-primary d-block" id="user0">0</span></th>
+        $("#points-table thead tr").append("<th><b contenteditable='true'>U"+noOfPersons+"</b><span class='badge badge-primary d-block f-18px' id='user"+noOfPersons+"'>0</span></th>");
       });
     });
 </script>
 
 <style type="text/css">
-  body, .wrapper {
-    /* Break the flow */
-    position: absolute;
-    top: 0px;
+  @media only screen and (orientation:landscape){
+    body, .wrapper {
+      /* Break the flow */
+      position: absolute;
+      top: 0px;
 
-    /* Give them all the available space */
-    width: 100%;
-    height: 100%;
+      /* Give them all the available space */
+      width: 100%;
+      height: 100%;
 
-    /* Remove the margins if any */
-    margin: 0;
+      /* Remove the margins if any */
+      margin: 0;
 
-    /* Allow them to scroll down the document */
-    overflow-y: hidden;
+      /* Allow them to scroll down the document */
+      overflow-y: hidden;
+    }
+
+    body{
+      /* Sending body at the bottom of the stack */
+      z-index: 1;
+    }
+
+    .wrapper {
+      /* Making the wrapper stack above the body */
+      z-index: 2;
+      overflow: auto;
+    }
+    #points-table thead tr th{
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .f-18px{
+      font-size: 18px !important;
+    }
   }
-
-body{
-    /* Sending body at the bottom of the stack */
-    z-index: 1;
-  }
-
-.wrapper {
-    /* Making the wrapper stack above the body */
-    z-index: 2;
-    overflow: auto;
-  }
-  #points-table thead tr th{
-    text-align: center;
-    text-transform: uppercase;
-  }
+  
 </style>
 </body>
 </html>
