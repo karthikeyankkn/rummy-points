@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Card point</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <div class="d-flex justify-content-between">
+    <button type="button" class="btn btn-success btn-sm">Start</button>
+    <button type="button" class="btn btn-danger btn-sm">End</button>
+    <button type="button" class="btn btn-primary btn-sm" id="total">Total</button>
+  </div>
+</div>
+<div class="table-responsive-sm">          
+  <table class="table table-bordered" id="points-table">
+    <thead>
+      <tr>
+        <th><b contenteditable="true">User 1</b><span class="badge badge-primary d-block" id="user0">0</span></th>
+        <th><b contenteditable="true">User 2</b><span class="badge badge-primary d-block" id="user1">0</span></th>
+        <th><b contenteditable="true">User 3</b><span class="badge badge-primary d-block" id="user2">0</span></th>
+        <th><b contenteditable="true">User 4</b><span class="badge badge-primary d-block" id="user3">0</span></th>
+        <th><b contenteditable="true">User 5</b><span class="badge badge-primary d-block" id="user4">0</span></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <div class="text-center">
+    <button type="button" class="btn btn-success mt-2" id="add-row">+</button>
+    <button type="button" class="btn btn-danger mt-2" id="delete-row">-</button>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+    var users = [];
+    $('#total').click(function(){
+      var table = document.getElementById('points-table');
+      var noOfPersons = 5;
+      var noOfRounds = table.rows.length - 1;
+      debugger
+      for(var i = 0; i < noOfPersons; i++){
+        users[i] = 0;
+        for(var j = 0; j < noOfRounds; j++){
+          users[i] = users[i] + parseInt(table.rows[j+1].cells[i].innerText);
+          console.log(table.rows[j+1].cells[i].innerText);
+        }
+        $('#user'+i).text(users[i]);
+      }
+      console.log(users);
+    });
+
+    $("#add-row").click(function(){
+      $("#points-table").append('<tr><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td></tr>');
+    });
+    $("#delete-row").click(function(){
+      $('#points-table tr:last').remove();
+    });
+  });
+</script>
+
+<style type="text/css">
+  #points-table thead tr th{
+    text-align: center;
+    text-transform: uppercase;
+  }
+</style>
+</body>
+</html>
