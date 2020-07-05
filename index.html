@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div class="jumbotron text-center">
+<div class="jumbotron text-center wrapper">
   <div class="d-flex justify-content-between">
     <button type="button" class="btn btn-success btn-sm">Start</button>
     <button type="button" class="btn btn-danger btn-sm">End</button>
@@ -72,6 +72,31 @@
   #points-table thead tr th{
     text-align: center;
     text-transform: uppercase;
+  }
+  body, .wrapper {
+    /* Break the flow */
+    position: absolute;
+    top: 0px;
+
+    /* Give them all the available space */
+    width: 100%;
+    height: 100%;
+
+    /* Remove the margins if any */
+    margin: 0;
+
+    /* Allow them to scroll down the document */
+    overflow-y: hidden;
+  }
+
+body{
+    /* Sending body at the bottom of the stack */
+    z-index: 1;
+  }
+
+.wrapper {
+    /* Making the wrapper stack above the body */
+    z-index: 2;
   }
 </style>
 </body>
