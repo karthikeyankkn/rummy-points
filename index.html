@@ -42,32 +42,41 @@
   </div>
 
 <script type="text/javascript">
-  $(document).ready(function(){
-    
-    var users = [];
-    $('#total').click(function(){
-      var table = document.getElementById('points-table');
-      var noOfPersons = 5;
-      var noOfRounds = table.rows.length - 1;
-      debugger
-      for(var i = 0; i < noOfPersons; i++){
-        users[i] = 0;
-        for(var j = 0; j < noOfRounds; j++){
-          users[i] = users[i] + parseInt(table.rows[j+1].cells[i].innerText);
-          console.log(table.rows[j+1].cells[i].innerText);
+    $(document).ready(function(){
+      var users = [];
+      $('#total').click(function(){
+        var table = document.getElementById('points-table');
+        var noOfPersons = 5;
+        var noOfRounds = table.rows.length - 1;
+        debugger
+        for(var i = 0; i < noOfPersons; i++){
+          users[i] = 0;
+          for(var j = 0; j < noOfRounds; j++){
+            users[i] = users[i] + parseInt(table.rows[j+1].cells[i].innerText);
+            console.log(table.rows[j+1].cells[i].innerText);
+          }
+          $('#user'+i).text(users[i]);
         }
-        $('#user'+i).text(users[i]);
-      }
-      console.log(users);
-    });
+        console.log(users);
+      });
 
-    $("#add-row").click(function(){
-      $("#points-table").append('<tr><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td></tr>');
+      $("#add-row").click(function(){
+        $("#points-table").append('<tr><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td></tr>');
+      });
+      $("#delete-row").click(function(){
+        $('#points-table tr:last').remove();
+      });
+      // $("#points-table tbody tr td").keypress(function(e) {
+      //   // debugger
+      //   console.log("cliked");
+      //   if (isNaN(String.fromCharCode(e.which))) e.preventDefault();
+      // });
+      $(document).on('keypress', function(e) {
+        // debugger
+        console.log("cliked");
+        if (isNaN(String.fromCharCode(e.which))) e.preventDefault();
+      });
     });
-    $("#delete-row").click(function(){
-      $('#points-table tr:last').remove();
-    });
-  });
 </script>
 
 <style type="text/css">
